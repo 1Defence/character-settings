@@ -1,4 +1,4 @@
-package com.example;
+package com.charactersettings;
 
 import com.google.inject.Provides;
 import javax.inject.Inject;
@@ -14,40 +14,32 @@ import net.runelite.client.plugins.PluginDescriptor;
 
 @Slf4j
 @PluginDescriptor(
-	name = "Example"
+	name = "Character Settings",
+	description = "save character specific settings, to match when on a different account/profile."
 )
-public class ExamplePlugin extends Plugin
+public class CharacterSettingsPlugin extends Plugin
 {
 	@Inject
 	private Client client;
 
 	@Inject
-	private ExampleConfig config;
+	private CharacterSettingsConfig config;
 
 	@Override
 	protected void startUp() throws Exception
 	{
-		log.debug("Example started!");
+
 	}
 
 	@Override
 	protected void shutDown() throws Exception
 	{
-		log.debug("Example stopped!");
-	}
 
-	@Subscribe
-	public void onGameStateChanged(GameStateChanged gameStateChanged)
-	{
-		if (gameStateChanged.getGameState() == GameState.LOGGED_IN)
-		{
-			client.addChatMessage(ChatMessageType.GAMEMESSAGE, "", "Example says " + config.greeting(), null);
-		}
 	}
 
 	@Provides
-	ExampleConfig provideConfig(ConfigManager configManager)
+	CharacterSettingsConfig provideConfig(ConfigManager configManager)
 	{
-		return configManager.getConfig(ExampleConfig.class);
+		return configManager.getConfig(CharacterSettingsConfig.class);
 	}
 }
